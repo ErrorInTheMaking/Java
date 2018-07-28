@@ -13,6 +13,8 @@ public class Warrior {
 	private static int maxAttackingPower = 50;
 	private static double maxJumpingHeight = 1; //in meters
 	private static int sumAttackingPower = 0;
+	private static int sumDefensivePower = 0;
+	private static int sumJumpingPower = 0;
 	protected static final int MAX_ATTACKING_POWER = 300;
 	protected static final int MIN_ATTACKING_POWER = 0;
 	protected static final int MAX_DEFENSIVE_POWER = 400;
@@ -21,7 +23,8 @@ public class Warrior {
     private static ArrayList<Integer> arrayMinAttackingPower = new ArrayList<Integer>();
     private static ArrayList<Integer> arrayMinDefensivePower = new ArrayList<Integer>();
     private static ArrayList<Double> arrayMinJumpingPower = new ArrayList<Double>();
-    
+	static Scanner in  = new Scanner(System.in);
+	
 	public Warrior(String name) {
 		Warrior.warriorsCounter++;
 		this.name = name;
@@ -30,6 +33,9 @@ public class Warrior {
 		this.setJumpingHeight(1);
 		this.setWarriorSound();
 		this.setId();
+	}
+	private static void newline(){
+		System.out.println("------------------------------");
 	}
 	public void enrollMaxDefensiveValues() {
 		arrayMaxDefensivePower.add(this.defensivePower);
@@ -54,9 +60,6 @@ public class Warrior {
 	}
 	public static double calculateMinJumpingValues() {
 		return Collections.min(arrayMinJumpingPower);
-	}
-	void lines() {
-		System.out.println("---------------------------");
 	}
 	private void setId() {
 		this.id = (long)(Math.random()*100 + 1);
@@ -218,25 +221,25 @@ public class Warrior {
 		System.out.printf("Jump:%.3g\n", warrior.getJumpingHeight());
 		System.out.println("Sound:" + warrior.getWarriorSound());
 		System.out.println("ID:" + warrior.getId());
-		warrior.lines();
+		newline();
 	}
 	
 	public static void printMinMaxValues() {
 		System.out.println("Max attacking power " + maxAttackingPower);
 		System.out.println("Max defensive power " + Warrior.calculateMaxDefensiveValues());
 		System.out.printf("Max jumping height %.2g\n", maxJumpingHeight);
+		newline();
 		System.out.println("Min attacking power " + Warrior.calculateMinAttackingValues());
 		System.out.println("Min defensive power " + Warrior.calculateMinDefensiveValues());
 		System.out.printf("Min jumping height %.2g\n", Warrior.calculateMinJumpingValues());
 	}
 	public static void printAverageValues() {
+		newline();
 		System.out.println("Average attacking power " + Warrior.findAverageAttackingPower());
-		/*System.out.println("Max defensive power " + Warrior.calculateMaxDefensiveValues());
-		System.out.printf("Max jumping height %.2g\n", maxJumpingHeight);
-		System.out.println("Min attacking power " + Warrior.calculateMinAttackingValues());
-		System.out.println("Min defensive power " + Warrior.calculateMinDefensiveValues());
-		System.out.printf("Min jumping height %.2g\n", Warrior.calculateMinJumpingValues());
-		*/
+		System.out.println("Average defensive power " + Warrior.findAverageDefensivePower());
+		System.out.printf("Average jumping height %.2g\n", Warrior.findAverageJumpingPower());
+		newline();
+
 	}
 	public static void checkId(Warrior warrior, long id) {
 		if(id == warrior.id) {
@@ -247,11 +250,39 @@ public class Warrior {
 		else
 			System.out.println(warrior.name +": You guessed the wrong id (" + id + ").ID:" + warrior.id);
 	}
-	
+	public static void checkId(Warrior warrior) throws Exception{
+		long guess;
+		System.out.print("Enter an id:");
+		if(in.hasNextLong()){
+			guess = in.nextLong();
+			if(guess == warrior.id){
+				System.out.println("You guessed the id!\nBonus +50 attacking power");
+				warrior.attackingPower += 50;
+				warrior.findMaxAttackingPower();
+				in.close(); //Close Scanner
+			}
+			else
+				System.out.println(warrior.name +": You guessed the wrong id (" + guess + ").ID:" + warrior.id);
+		}
+		else
+			throw new Exception("Enter Long number");
+	}	
 	protected void calculateSumAttackingPower() {
 		sumAttackingPower += attackingPower;
 	}
+	protected void calculateSumDefensivePower() {
+		sumDefensivePower += defensivePower;
+	}
+	protected void calculateSumJumpingPower() {
+		sumJumpingPower += jumpingHeight;
+	}
 	public static double findAverageAttackingPower() {
 		return Warrior.sumAttackingPower/Warrior.warriorsCounter;
+	}
+	public static double findAverageDefensivePower() {
+		return Warrior.sumDefensivePower/Warrior.warriorsCounter;
+	}
+	public static double findAverageJumpingPower() {
+		return Warrior.sumJumpingPower/Warrior.warriorsCounter;
 	}
 }
