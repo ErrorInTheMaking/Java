@@ -19,10 +19,12 @@ public class Warrior {
 	protected static final int MIN_ATTACKING_POWER = 0;
 	protected static final int MAX_DEFENSIVE_POWER = 400;
 	protected static final double MAX_JUMPING_HEIGHT = 5;  // meters 
-    private static ArrayList<Integer> arrayMaxDefensivePower = new ArrayList<Integer>();
-    private static ArrayList<Integer> arrayMinAttackingPower = new ArrayList<Integer>();
-    private static ArrayList<Integer> arrayMinDefensivePower = new ArrayList<Integer>();
-    private static ArrayList<Double> arrayMinJumpingPower = new ArrayList<Double>();
+    	
+	private static ArrayList<Integer> arrayMaxDefensivePower = new ArrayList<Integer>();
+    	private static ArrayList<Integer> arrayMinAttackingPower = new ArrayList<Integer>();
+    	private static ArrayList<Integer> arrayMinDefensivePower = new ArrayList<Integer>();
+    	private static ArrayList<Double> arrayMinJumpingPower = new ArrayList<Double>();
+	
 	static Scanner in  = new Scanner(System.in);
 	
 	public Warrior(String name) {
