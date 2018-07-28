@@ -29,7 +29,15 @@ public class Main extends Warrior{
 		for(int i = 0; i < warriors.size(); ++i)
 			warriors.get(i).calculateSumAttackingPower();
 	}
-	public static void main(String[] args) {
+	private static void calculateSumDefensivePowerMain(ArrayList<Warrior> warriors) {
+		for(int i = 0; i < warriors.size(); ++i)
+			warriors.get(i).calculateSumDefensivePower();
+	}
+	private static void calculateSumJumpingPowerMain(ArrayList<Warrior> warriors) {
+		for(int i = 0; i < warriors.size(); ++i)
+			warriors.get(i).calculateSumJumpingPower();
+	}
+	public static void main(String[] args) throws Exception{
 		ArrayList<Warrior> warriorList = new ArrayList<Warrior>();
 		
 		Warrior w1 = new Warrior("Frank");
@@ -54,7 +62,7 @@ public class Main extends Warrior{
 		w2.increaseAttackingPower(10);
 		w2.increaseAttackingPower(10);
 		
-		n1.increaseDefensivePower(20);
+		n1.increaseDefensivePower(30);
 		n1.increaseAttackingPower(5);
 		n1.increaseJumpingHeight(1.6);
 		
@@ -63,7 +71,9 @@ public class Main extends Warrior{
 		Warrior.compareJumpingPower(w1, w2);
 		
 		Warrior.checkId(w1, 14);
+		Warrior.checkId(w1);
 		
+		// Printing stats //
 		System.out.println("--------------------Stats-----------------------");
 		printWarriors(warriorList);
 		
@@ -73,8 +83,12 @@ public class Main extends Warrior{
 		enrollMinJumpingValuesMain(warriorList);
 
 		calculateSumAttackingPowerMain(warriorList);
+		calculateSumDefensivePowerMain(warriorList);
+		calculateSumJumpingPowerMain(warriorList);
 		
 		Warrior.findAverageAttackingPower();
+		Warrior.findAverageDefensivePower();
+		Warrior.findAverageJumpingPower();
 		
 		Warrior.printMinMaxValues();
 		Warrior.printAverageValues();
